@@ -1,0 +1,56 @@
+#include <iostream>
+#include <vector>
+#include <cstdlib> // Para generar números aleatorios
+#include <ctime>   // Para inicializar la semilla del generador de números aleatorios
+
+std::vector<int> sumaAcumulada(const std::vector<int>& numeros)
+{
+    std::vector<int> acumulado;
+    int suma = 0;
+
+    for (int numero : numeros) {
+        suma += numero;
+        acumulado.push_back(suma);
+    }
+
+    return acumulado;
+}
+
+int main()
+{
+    std::srand(std::time(0)); // Inicializar la semilla del generador de números aleatorios
+
+    std::vector<int> vectorA;
+    const int tamanoVector = 3; // Tamaño del vector
+
+    // Generar números aleatorios menores a 30 y agregarlos al vectorA
+    for (int i = 0; i < tamanoVector; i++) {
+        int numeroAleatorio = std::rand() % 30;
+        vectorA.push_back(numeroAleatorio);
+    }
+
+    // Mostrar el vectorA generado
+    std::cout << "VectorA: [";
+    for (int i = 0; i < tamanoVector; i++) {
+        std::cout << vectorA[i];
+        if (i != tamanoVector - 1) {
+            std::cout << ", ";
+        }
+    }
+    std::cout << "]" << std::endl;
+
+    // Calcular la suma acumulada utilizando la función sumaAcumulada
+    std::vector<int> vectorAcumulado = sumaAcumulada(vectorA);
+
+    // Mostrar el vectorAcumulado
+    std::cout << "VectorAcumulado: [";
+    for (int i = 0; i < tamanoVector; i++) {
+        std::cout << vectorAcumulado[i];
+        if (i != tamanoVector - 1) {
+            std::cout << ", ";
+        }
+    }
+    std::cout << "]" << std::endl;
+
+    return 0;
+}
